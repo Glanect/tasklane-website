@@ -256,7 +256,8 @@ p {
 
 /* Light variant for dark-background sections */
 .section-head--light h2,
-.section-head--light h3 {
+.section-head--light h3,
+.section-head--light p {
   color: var(--color-grey-f5);
 }
 
@@ -674,43 +675,45 @@ cite {
    =================================================================== */
 
 .section-overview {
-  background: var(--color-extra-dark-blue);
+  background: var(--color-dark-blue);
   padding: 80px 0;
 }
 
 .feature-split {
   display: grid;
-  gap: 2.5rem;
+  gap: 50px;
 }
 
 .feature-item {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 0.85fr 1.15fr;
   gap: 2rem;
   align-items: center;
 }
 
-.feature-item.reversed {
+.feature-item:nth-child(odd) {
   direction: rtl;
 }
 
-.feature-item.reversed > * {
+.feature-item:nth-child(odd) > * {
   direction: ltr;
 }
 
 .feature-text h3 {
   margin-bottom: 0.5rem;
-  color: #fff;
+  color: var(--color-grey-f5);
+  font-size: clamp(1.4rem, 3vw, 1.75rem);
 }
 
 .feature-text p {
-  color: rgba(255, 255, 255, 0.82);
+  color: var(--color-grey-f5);
+  font-size: clamp(1rem, 1.8vw, 1.125rem);
   line-height: 1.55;
 }
 
 .feature-img img {
   width: 100%;
-  border-radius: 2px;
+  border-radius: 8px;
 }
 
 /* ===================================================================
@@ -1082,7 +1085,7 @@ cite {
     grid-template-columns: 1fr;
   }
 
-  .feature-item.reversed {
+  .feature-item:nth-child(odd) {
     direction: ltr;
   }
 
@@ -1272,6 +1275,10 @@ cite {
 
   .metric-value {
     font-size: clamp(2.4rem, 12vw, 72px);
+  }
+
+  .feature-split {
+    gap: 30px;
   }
 
   .tabs {
