@@ -277,6 +277,32 @@ const demoForm = document.querySelector('.demo-form');
 if (demoForm) {
   demoForm.setAttribute('novalidate', 'novalidate');
 
+  const toastStack = document.querySelector('.toast-stack');
+  const submitButton = demoForm.querySelector('button[type="submit"]');
+
+  function showToast(message, type = 'success') {
+    if (!toastStack) return;
+
+    const toast = document.createElement('div');
+    toast.className = `toast toast--${type}`;
+    toast.textContent = message;
+    toast.setAttribute('role', 'status');
+
+    toastStack.appendChild(toast);
+
+    requestAnimationFrame(() => {
+      toast.classList.add('visible');
+    });
+
+    window.setTimeout(() => {
+      toast.classList.remove('visible');
+
+      window.setTimeout(() => {
+        toast.remove();
+      }, 220);
+    }, 3200);
+  }
+
   const fields = Array.from(
     demoForm.querySelectorAll('input:not([type="hidden"]):not([name="bot-field"]), textarea')
   );
@@ -333,6 +359,16 @@ if (demoForm) {
     return true;
   }
 
+  function clearFieldValidationState(field) {
+    const errorMessageElement = getOrCreateErrorMessageElement(field);
+    field.classList.remove('error');
+    errorMessageElement?.classList.remove('visible');
+  }
+
+  function encodeFormPayload(formData) {
+    return new URLSearchParams(formData).toString();
+  }
+
   fields.forEach((field) => {
     field.addEventListener('input', () => {
       setFieldValidationState(field);
@@ -343,7 +379,9 @@ if (demoForm) {
     });
   });
 
-  demoForm.addEventListener('submit', (event) => {
+  demoForm.addEventListener('submit', async (event) => {
+    event.preventDefault();
+
     let hasInvalidField = false;
 
     fields.forEach((field) => {
@@ -354,10 +392,45 @@ if (demoForm) {
     });
 
     if (hasInvalidField) {
-      event.preventDefault();
-
       const firstInvalidField = fields.find((field) => !field.checkValidity());
       firstInvalidField?.focus();
+      return;
+    }
+
+    const originalSubmitLabel = submitButton?.textContent;
+
+    if (submitButton) {
+      submitButton.disabled = true;
+      submitButton.textContent = 'Sending...';
+    }
+
+    try {
+      const formData = new FormData(demoForm);
+      const response = await fetch('/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: encodeFormPayload(formData),
+      });
+
+      if (!response.ok) {
+        throw new Error(`Form submission failed with status ${response.status}`);
+      }
+
+      demoForm.reset();
+      fields.forEach((field) => {
+        clearFieldValidationState(field);
+      });
+
+      showToast('Thanks! Your demo request has been sent.', 'success');
+    } catch {
+      showToast('Something went wrong. Please try again.', 'error');
+    } finally {
+      if (submitButton) {
+        submitButton.disabled = false;
+        submitButton.textContent = originalSubmitLabel || 'Submit';
+      }
     }
   });
 }

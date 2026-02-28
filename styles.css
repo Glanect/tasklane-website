@@ -1101,6 +1101,46 @@ cite {
   width: 100%;
 }
 
+.toast-stack {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  z-index: 2000;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: min(92vw, 360px);
+  pointer-events: none;
+}
+
+.toast {
+  border-radius: 8px;
+  padding: 12px 14px;
+  color: var(--color-grey-f5);
+  font-family: var(--font-heading);
+  font-size: 0.95rem;
+  line-height: 1.4;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.16);
+  opacity: 0;
+  transform: translate3d(0, 8px, 0);
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease;
+}
+
+.toast.visible {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+
+.toast--success {
+  background: var(--color-turquoise);
+}
+
+.toast--error {
+  background: var(--color-red);
+}
+
 /* ===================================================================
    FOOTER
    =================================================================== */
