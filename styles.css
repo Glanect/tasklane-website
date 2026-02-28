@@ -484,6 +484,7 @@ textarea {
 .section-promo-shots {
   position: relative;
   background: var(--color-grey-f5);
+  --promo-progress: 0;
 }
 
 .section-promo-shots .inner {
@@ -496,20 +497,26 @@ textarea {
   position: relative;
   width: 100%;
   margin: 0 auto;
+  transform: translateY(calc(-8% + (8% * var(--promo-progress))));
+  will-change: transform;
 }
 
 .section-promo-shots .image-start {
   position: absolute;
-  bottom: 10%;
+  bottom: 30%;
   left: -12%;
   width: 25%;
+  transform: translateY(calc(34% * var(--promo-progress)));
+  will-change: transform;
 }
 
 .section-promo-shots .image-checklists {
   position: absolute;
-  bottom: 0;
+  bottom: 10%;
   right: -12%;
   width: 25%;
+  transform: translateY(calc(27% * var(--promo-progress)));
+  will-change: transform;
 }
 
 /* ===================================================================
@@ -1498,14 +1505,20 @@ cite {
     padding-top: 24px;
   }
 
+  .section-promo-shots .image-dashboard {
+    transform: translateY(0);
+  }
+
   .section-promo-shots .image-start {
     position: static;
     width: 50%;
+    transform: none;
   }
 
   .section-promo-shots .image-checklists {
     position: static;
     width: 50%;
+    transform: none;
   }
 }
 

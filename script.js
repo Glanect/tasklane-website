@@ -319,3 +319,46 @@ if (demoForm) {
     }
   });
 }
+
+/* ── Promo shots parallax ──────────────────────────── */
+const promoSection = document.querySelector('.section-promo-shots');
+
+if (promoSection) {
+  const desktopMediaQuery = window.matchMedia('(min-width: 761px)');
+  const reducedMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+  let rafScheduled = false;
+
+  const clamp = (value, min, max) => Math.min(Math.max(value, min), max);
+
+  const updatePromoParallax = () => {
+    rafScheduled = false;
+
+    if (!desktopMediaQuery.matches || reducedMotionQuery.matches) {
+      promoSection.style.setProperty('--promo-progress', '1');
+      return;
+    }
+
+    const rect = promoSection.getBoundingClientRect();
+    const viewportHeight = window.innerHeight;
+    const startPoint = viewportHeight * 0.9;
+    const totalDistance = startPoint + rect.height;
+    const rawProgress = (startPoint - rect.top) / Math.max(totalDistance, 1);
+    const progress = clamp(rawProgress, 0, 1);
+
+    promoSection.style.setProperty('--promo-progress', progress.toFixed(4));
+  };
+
+  const requestPromoParallaxUpdate = () => {
+    if (rafScheduled) return;
+    rafScheduled = true;
+    window.requestAnimationFrame(updatePromoParallax);
+  };
+
+  window.addEventListener('scroll', requestPromoParallaxUpdate, { passive: true });
+  window.addEventListener('resize', requestPromoParallaxUpdate);
+  desktopMediaQuery.addEventListener('change', requestPromoParallaxUpdate);
+  reducedMotionQuery.addEventListener('change', requestPromoParallaxUpdate);
+
+  requestPromoParallaxUpdate();
+}
