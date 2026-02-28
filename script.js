@@ -100,32 +100,85 @@ const videoOverlay = howSection?.querySelector('.video-overlay');
 const videoContainer = howSection?.querySelector('.video-container');
 
 if (demoVideo && videoOverlay && videoContainer) {
-  let hasStartedPlayback = false;
-
-  const handleVideoInteraction = async () => {
-    if (!hasStartedPlayback) {
-      videoOverlay.style.display = 'none';
-      demoVideo.setAttribute('playsinline', '');
-
-      try {
-        await demoVideo.play();
-        hasStartedPlayback = true;
-      } catch {
-        videoOverlay.style.display = '';
-      }
-
-      return;
-    }
-
-    if (demoVideo.paused) {
-      await demoVideo.play();
-      return;
-    }
-
-    demoVideo.pause();
+  const showVideoOverlay = () => {
+    videoOverlay.style.display = '';
   };
 
-  videoContainer.addEventListener('click', handleVideoInteraction);
+  const hideVideoOverlay = () => {
+    videoOverlay.style.display = 'none';
+  };
+
+  const isPhoneDevice = (() => {
+    const userAgent = navigator.userAgent || '';
+    const isIPhoneOrIPod = /iPhone|iPod/i.test(userAgent);
+    const isAndroidPhone = /Android/i.test(userAgent) && /Mobile/i.test(userAgent);
+    const isWindowsPhone = /Windows Phone/i.test(userAgent);
+
+    return isIPhoneOrIPod || isAndroidPhone || isWindowsPhone;
+  })();
+
+  const requestFullscreenForVideo = async () => {
+    if (demoVideo.requestFullscreen) {
+      await demoVideo.requestFullscreen();
+      return;
+    }
+
+    if (videoContainer.requestFullscreen) {
+      await videoContainer.requestFullscreen();
+      return;
+    }
+
+    if (typeof demoVideo.webkitEnterFullscreen === 'function') {
+      demoVideo.webkitEnterFullscreen();
+    }
+  };
+
+  if (isPhoneDevice) {
+    demoVideo.addEventListener('play', hideVideoOverlay);
+    demoVideo.addEventListener('pause', showVideoOverlay);
+    demoVideo.addEventListener('ended', showVideoOverlay);
+
+    const handleMobileVideoInteraction = async () => {
+      try {
+        if (demoVideo.paused) {
+          await demoVideo.play();
+        }
+
+        await requestFullscreenForVideo();
+      } catch {
+        showVideoOverlay();
+      }
+    };
+
+    videoContainer.addEventListener('click', handleMobileVideoInteraction);
+  } else {
+    let hasStartedPlayback = false;
+
+    const handleDesktopVideoInteraction = async () => {
+      if (!hasStartedPlayback) {
+        hideVideoOverlay();
+        demoVideo.setAttribute('playsinline', '');
+
+        try {
+          await demoVideo.play();
+          hasStartedPlayback = true;
+        } catch {
+          showVideoOverlay();
+        }
+
+        return;
+      }
+
+      if (demoVideo.paused) {
+        await demoVideo.play();
+        return;
+      }
+
+      demoVideo.pause();
+    };
+
+    videoContainer.addEventListener('click', handleDesktopVideoInteraction);
+  }
 } else {
   console.warn('Demo video elements not found, skipping video setup');
 }
