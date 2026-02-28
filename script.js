@@ -279,9 +279,12 @@ if (demoForm) {
 
   const toastStack = document.querySelector('.toast-stack');
   const submitButton = demoForm.querySelector('button[type="submit"]');
+  const showSuccessToastPreview = false;
 
-  function showToast(message, type = 'success') {
+  function showToast(message, type = 'success', options = {}) {
     if (!toastStack) return;
+
+    const { persistent = false } = options;
 
     const toast = document.createElement('div');
     toast.className = `toast toast--${type}`;
@@ -294,6 +297,10 @@ if (demoForm) {
       toast.classList.add('visible');
     });
 
+    if (persistent) {
+      return;
+    }
+
     window.setTimeout(() => {
       toast.classList.remove('visible');
 
@@ -301,6 +308,10 @@ if (demoForm) {
         toast.remove();
       }, 220);
     }, 3200);
+  }
+
+  if (showSuccessToastPreview) {
+    showToast('Thanks! Your demo request has been sent', 'success', { persistent: true });
   }
 
   const fields = Array.from(
@@ -423,9 +434,9 @@ if (demoForm) {
         clearFieldValidationState(field);
       });
 
-      showToast('Thanks! Your demo request has been sent.', 'success');
+      showToast('Thanks! Your demo request has been sent', 'success');
     } catch {
-      showToast('Something went wrong. Please try again.', 'error');
+      showToast('Something went wrong. Please try again', 'error');
     } finally {
       if (submitButton) {
         submitButton.disabled = false;
