@@ -1,4 +1,6 @@
 /* ── Header scroll background ─────────────────────── */
+document.documentElement.classList.add('js');
+
 const siteHeader = document.querySelector('.site-header');
 
 function onScroll() {
@@ -361,4 +363,64 @@ if (promoSection) {
   reducedMotionQuery.addEventListener('change', requestPromoParallaxUpdate);
 
   requestPromoParallaxUpdate();
+}
+
+/* ── Scroll reveal animations ─────────────────────── */
+const revealReduceMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+const revealElements = Array.from(document.querySelectorAll('[data-reveal-on-scroll]'));
+const validRevealDirections = new Set(['up', 'left', 'right']);
+
+revealElements.forEach((element) => {
+  const requestedDirection = element.dataset.revealOnScroll;
+  const requestedDelay = element.dataset.revealDelay;
+
+  if (!validRevealDirections.has(requestedDirection)) {
+    console.warn(
+      `Invalid data-reveal-on-scroll value "${requestedDirection}". Falling back to "up".`,
+      element
+    );
+  }
+
+  const direction = validRevealDirections.has(requestedDirection) ? requestedDirection : 'up';
+  element.classList.add('reveal-on-scroll', `reveal-${direction}`);
+
+  if (requestedDelay !== undefined) {
+    const delayValue = Number(requestedDelay);
+
+    if (requestedDelay.trim() !== '' && Number.isFinite(delayValue) && delayValue >= 0) {
+      element.style.transitionDelay = `${delayValue}ms`;
+    } else {
+      console.warn(
+        `Invalid data-reveal-delay value "${requestedDelay}". Expected a non-negative number in milliseconds.`,
+        element
+      );
+    }
+  }
+});
+
+if (revealReduceMotionQuery.matches || !('IntersectionObserver' in window)) {
+  revealElements.forEach((element) => {
+    element.classList.add('is-visible');
+  });
+} else {
+  const revealObserver = new IntersectionObserver(
+    (entries, observer) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+
+        entry.target.classList.add('is-visible');
+
+        observer.unobserve(entry.target);
+      });
+    },
+    {
+      root: null,
+      threshold: 0.2,
+      rootMargin: '0px 0px -8% 0px',
+    }
+  );
+
+  revealElements.forEach((element) => {
+    revealObserver.observe(element);
+  });
 }
