@@ -38,25 +38,8 @@ if (menuToggle && nav) {
 
   nav.querySelectorAll('a').forEach((link) => {
     link.addEventListener('click', () => {
-      const href = link.getAttribute('href') || '';
-      const isHashLink = href.startsWith('#');
-
-      if (!isHashLink) {
+      if (window.innerWidth <= 760) {
         setMobileNavState(false);
-        return;
-      }
-
-      const target = document.querySelector(href);
-      if (!target) {
-        setMobileNavState(false);
-        return;
-      }
-
-      const isMobileDrawer = window.innerWidth <= 760;
-
-      if (isMobileDrawer) {
-        setMobileNavState(false);
-        return;
       }
     });
   });
@@ -150,6 +133,7 @@ if (demoVideo && videoOverlay && videoContainer) {
 /* ── FAQ accordion animation ───────────────────────── */
 const faqItems = Array.from(document.querySelectorAll('.faq-list details'));
 const animatingFaqItems = new WeakSet();
+const faqReducedMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
 
 function animateFaqItem(item, shouldOpen) {
   const summary = item.querySelector('summary');
@@ -201,7 +185,7 @@ faqItems.forEach((item) => {
   summary.addEventListener('click', (event) => {
     event.preventDefault();
 
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const prefersReducedMotion = faqReducedMotionQuery.matches;
 
     if (prefersReducedMotion) {
       if (item.open) {
@@ -251,8 +235,11 @@ if (demoForm) {
   }
 
   function getFieldErrorMessage(field) {
+    const labelText = getFieldLabelText(field);
+
     if (field.validity.valueMissing) {
-      return `Please enter ${getFieldLabelText(field) === 'email address' ? `an ${getFieldLabelText(field)}` : `a ${getFieldLabelText(field)}`}`;
+      const article = labelText === 'email address' ? 'an' : 'a';
+      return `Please enter ${article} ${labelText}`;
     }
 
     if (field.validity.typeMismatch && field.type === 'email') {
@@ -373,15 +360,16 @@ const validRevealDirections = new Set(['up', 'left', 'right']);
 revealElements.forEach((element) => {
   const requestedDirection = element.dataset.revealOnScroll;
   const requestedDelay = element.dataset.revealDelay;
+  const isDirectionValid = validRevealDirections.has(requestedDirection);
 
-  if (!validRevealDirections.has(requestedDirection)) {
+  if (!isDirectionValid) {
     console.warn(
       `Invalid data-reveal-on-scroll value "${requestedDirection}". Falling back to "up".`,
       element
     );
   }
 
-  const direction = validRevealDirections.has(requestedDirection) ? requestedDirection : 'up';
+  const direction = isDirectionValid ? requestedDirection : 'up';
   element.classList.add('reveal-on-scroll', `reveal-${direction}`);
 
   if (requestedDelay !== undefined) {

@@ -259,20 +259,6 @@ textarea {
   color: var(--color-grey-f5);
 }
 
-/* Dark variant — used on form submit */
-.button--dark {
-  background: var(--color-black);
-  border-color: var(--color-black);
-  color: #fff;
-}
-
-.button--dark:hover,
-.button--dark:focus-visible {
-  background: var(--color-grey-fb);
-  border-color: var(--color-black);
-  color: var(--color-black);
-}
-
 .button-sm {
   display: inline-flex;
   padding: 0.5rem 0.9rem;
@@ -285,11 +271,6 @@ textarea {
   max-width: var(--max-content-width);
   margin: 0 auto 2.2rem;
   text-align: center;
-}
-
-.section-head.left {
-  margin-inline: 0;
-  text-align: left;
 }
 
 .section-head p {
@@ -480,36 +461,6 @@ textarea {
 .hero-btn {
   font-size: 1.15rem;
   padding: 0.7rem 1.8rem;
-}
-
-.hero-media {
-  position: relative;
-  min-height: 420px;
-}
-
-.device {
-  overflow: hidden;
-  margin: 0;
-  padding: 0;
-  border: 0;
-}
-
-.device img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.device-desktop {
-  position: absolute;
-  inset: 0 0 3rem;
-}
-
-.device-phone {
-  position: absolute;
-  right: -0.5rem;
-  bottom: 0;
-  width: min(36%, 185px);
 }
 
 /* ===================================================================
@@ -1027,7 +978,6 @@ cite {
 }
 
 .faq-list summary {
-  display: flex;
   gap: 20px;
   list-style: none;
   display: flex;
@@ -1288,27 +1238,12 @@ cite {
    =================================================================== */
 
 @media (max-width: 980px) {
-  .hero-grid,
   .feature-item {
     grid-template-columns: 1fr;
   }
 
   .feature-item:nth-child(odd) {
     direction: ltr;
-  }
-
-  .hero-media {
-    min-height: 340px;
-  }
-
-  .device-desktop {
-    inset: 0;
-  }
-
-  .device-phone {
-    right: 0;
-    bottom: -0.9rem;
-    width: min(34%, 165px);
   }
 
   .feature-grid {
@@ -1451,10 +1386,6 @@ cite {
     transform: translateY(-6px) rotate(-45deg);
   }
 
-  .hero-media {
-    min-height: 260px;
-  }
-
   .hero-sub {
     max-width: 100%;
   }
@@ -1466,10 +1397,6 @@ cite {
 
   .section-title {
     margin-bottom: 10px;
-  }
-
-  .device-phone {
-    width: min(37%, 145px);
   }
 
   .metrics-grid,
