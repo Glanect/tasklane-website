@@ -144,3 +144,178 @@ if (demoVideo && videoOverlay && videoContainer) {
 } else {
   console.warn('Demo video elements not found, skipping video setup');
 }
+
+/* ── FAQ accordion animation ───────────────────────── */
+const faqItems = Array.from(document.querySelectorAll('.faq-list details'));
+const animatingFaqItems = new WeakSet();
+
+function animateFaqItem(item, shouldOpen) {
+  const summary = item.querySelector('summary');
+  if (!summary || animatingFaqItems.has(item) || item.open === shouldOpen) {
+    return;
+  }
+
+  const startHeight = item.offsetHeight;
+  animatingFaqItems.add(item);
+
+  item.style.overflow = 'hidden';
+  item.style.height = `${startHeight}px`;
+  item.style.transition = 'height 240ms ease';
+
+  if (shouldOpen) {
+    item.open = true;
+  }
+
+  const endHeight = shouldOpen ? item.scrollHeight : summary.offsetHeight;
+
+  requestAnimationFrame(() => {
+    item.style.height = `${endHeight}px`;
+  });
+
+  const onTransitionEnd = (transitionEvent) => {
+    if (transitionEvent.target !== item || transitionEvent.propertyName !== 'height') {
+      return;
+    }
+
+    item.removeEventListener('transitionend', onTransitionEnd);
+
+    if (!shouldOpen) {
+      item.open = false;
+    }
+
+    item.style.height = '';
+    item.style.overflow = '';
+    item.style.transition = '';
+    animatingFaqItems.delete(item);
+  };
+
+  item.addEventListener('transitionend', onTransitionEnd);
+}
+
+faqItems.forEach((item) => {
+  const summary = item.querySelector('summary');
+  if (!summary) return;
+
+  summary.addEventListener('click', (event) => {
+    event.preventDefault();
+
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    if (prefersReducedMotion) {
+      if (item.open) {
+        item.open = false;
+        return;
+      }
+
+      faqItems.forEach((otherItem) => {
+        if (otherItem !== item) {
+          otherItem.open = false;
+        }
+      });
+
+      item.open = true;
+      return;
+    }
+
+    if (item.open) {
+      animateFaqItem(item, false);
+      return;
+    }
+
+    faqItems.forEach((otherItem) => {
+      if (otherItem !== item && otherItem.open) {
+        animateFaqItem(otherItem, false);
+      }
+    });
+
+    animateFaqItem(item, true);
+  });
+});
+
+/* ── Demo form validation ──────────────────────────── */
+const demoForm = document.querySelector('.demo-form');
+
+if (demoForm) {
+  demoForm.setAttribute('novalidate', 'novalidate');
+
+  const fields = Array.from(
+    demoForm.querySelectorAll('input:not([type="hidden"]):not([name="bot-field"]), textarea')
+  );
+
+  function getFieldLabelText(field) {
+    const label = demoForm.querySelector(`label[for="${field.id}"]`);
+    if (!label) return 'this field';
+    return label.textContent.replace('*', '').trim().toLowerCase();
+  }
+
+  function getFieldErrorMessage(field) {
+    if (field.validity.valueMissing) {
+      return `Please enter ${getFieldLabelText(field) === 'email address' ? `an ${getFieldLabelText(field)}` : `a ${getFieldLabelText(field)}`}`;
+    }
+
+    if (field.validity.typeMismatch && field.type === 'email') {
+      return 'Please enter a valid email address';
+    }
+
+    return 'Please check this field';
+  }
+
+  function getOrCreateErrorMessageElement(field) {
+    const fieldRow = field.closest('.field-row');
+    if (!fieldRow) return null;
+
+    let errorMessageElement = fieldRow.querySelector('.error-message');
+    if (!errorMessageElement) {
+      errorMessageElement = document.createElement('p');
+      errorMessageElement.className = 'error-message';
+      fieldRow.appendChild(errorMessageElement);
+    }
+
+    return errorMessageElement;
+  }
+
+  function setFieldValidationState(field) {
+    const errorMessageElement = getOrCreateErrorMessageElement(field);
+    if (!errorMessageElement) return true;
+
+    const isFieldValid = field.checkValidity();
+    field.classList.toggle('error', !isFieldValid);
+
+    if (!isFieldValid) {
+      errorMessageElement.textContent = getFieldErrorMessage(field);
+      errorMessageElement.classList.add('visible');
+      return false;
+    }
+
+    errorMessageElement.classList.remove('visible');
+    return true;
+  }
+
+  fields.forEach((field) => {
+    field.addEventListener('input', () => {
+      setFieldValidationState(field);
+    });
+
+    field.addEventListener('blur', () => {
+      setFieldValidationState(field);
+    });
+  });
+
+  demoForm.addEventListener('submit', (event) => {
+    let hasInvalidField = false;
+
+    fields.forEach((field) => {
+      const isFieldValid = setFieldValidationState(field);
+      if (!isFieldValid && !hasInvalidField) {
+        hasInvalidField = true;
+      }
+    });
+
+    if (hasInvalidField) {
+      event.preventDefault();
+
+      const firstInvalidField = fields.find((field) => !field.checkValidity());
+      firstInvalidField?.focus();
+    }
+  });
+}

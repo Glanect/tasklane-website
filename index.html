@@ -279,7 +279,7 @@
       <section class="section-features">
         <div class="container">
           <header class="section-head section-head--light">
-            <h2 class="section-title">Additional features</h2>
+            <h2 class="section-title section-title--small">Additional features</h2>
             <p>
               Discover all the ways Tasklane can help improve your business by booking a demo today!
             </p>
@@ -326,111 +326,138 @@
               more below.
             </p>
           </header>
-          <div class="tabs" role="tablist" aria-label="Audience tabs">
-            <button
-              class="tab-button active"
-              role="tab"
-              aria-selected="true"
-              aria-controls="audience-managers"
-              id="tab-managers"
-              data-tab="managers"
-            >
-              Propery Managers &amp; Team
-            </button>
-            <button
-              class="tab-button"
-              role="tab"
-              aria-selected="false"
-              aria-controls="audience-contractors"
-              id="tab-contractors"
-              data-tab="contractors"
-            >
-              Contractors
-            </button>
-            <button
-              class="tab-button"
-              role="tab"
-              aria-selected="false"
-              aria-controls="audience-tenants"
-              id="tab-tenants"
-              data-tab="tenants"
-            >
-              Tenants
-            </button>
-          </div>
-          <div class="tab-panels">
-            <article
-              class="tab-panel active"
-              role="tabpanel"
-              id="audience-managers"
-              aria-labelledby="tab-managers"
-              data-panel="managers"
-            >
-              <h3>Property Managers &amp; Team</h3>
-              <p>
-                We understand your challenges: you waste too much time on tedious tasks, struggle to
-                get reliable updates on maintenance issues, and fall behind on paperwork while
-                managing multiple properties. You also want to keep your tenants happy, increase
-                your revenue, and reduce your costs.
-              </p>
-              <p>
-                How about a simple solution that does all that for you? Meet Tasklane, the smart
-                property management platform. Tasklane helps you save time by automating your
-                workflows, assigning and tracking each job with real-time progress, and handling all
-                your paperwork in one place. You can access it from anywhere, anytime. Our
-                easy-to-use dashboard shows you all the key metrics on your properties, teams, and
-                maintenance. Plus, our AI-powered insights help you make data-driven decisions and
-                plans for your property investments. Ready to give it a try? Book a demo today
-              </p>
-            </article>
-            <article
-              class="tab-panel"
-              role="tabpanel"
-              id="audience-contractors"
-              aria-labelledby="tab-contractors"
-              data-panel="contractors"
-              hidden
-            >
-              <h3>Contractors</h3>
-              <p>Do you want to:</p>
-              <ul>
-                <li>Attract and retain more customers?</li>
-                <li>Track and manage your projects efficiently?</li>
-                <li>Get instant approval for your quotes?</li>
-                <li>Confirm the completion of your jobs with ease?</li>
-                <li>Monitor the payment status of your invoices?</li>
-              </ul>
-              <p>
-                If you answered yes to any of these questions, then you need Tasklane. Tasklane is
-                an end-to-end task management tool that helps you streamline your workflow and grow
-                your business. With Tasklane, you can:
-              </p>
-              <ul>
-                <li>Get transparent and fast feedback on your quotes from your clients</li>
-                <li>Use a simple app to mark your jobs as done and notify the property manager</li>
-                <li>
-                  Store and access all your documents in one place, without losing track of anything
-                </li>
-                <li>Find and connect with more potential customers through our platform</li>
-              </ul>
-              <p>Sounds good to you? Book a demo today</p>
-            </article>
-            <article
-              class="tab-panel"
-              role="tabpanel"
-              id="audience-tenants"
-              aria-labelledby="tab-tenants"
-              data-panel="tenants"
-              hidden
-            >
-              <h3>Tenants</h3>
-              <p>
-                Stay informed with transparent updates, faster issue resolution, and smoother
-                communication throughout every request. Tasklane makes it easy for you to report
-                maintenance issues, track progress in real time, and communicate directly with your
-                property management team.
-              </p>
-            </article>
+          <div class="tabbed-content">
+            <div class="tabs" role="tablist" aria-label="Audience tabs">
+              <button
+                class="tab-button active"
+                role="tab"
+                aria-selected="true"
+                aria-controls="audience-managers"
+                id="tab-managers"
+                data-tab="managers"
+              >
+                Propery Managers &amp; Team
+              </button>
+              <button
+                class="tab-button"
+                role="tab"
+                aria-selected="false"
+                aria-controls="audience-contractors"
+                id="tab-contractors"
+                data-tab="contractors"
+              >
+                Contractors
+              </button>
+              <button
+                class="tab-button"
+                role="tab"
+                aria-selected="false"
+                aria-controls="audience-tenants"
+                id="tab-tenants"
+                data-tab="tenants"
+              >
+                Tenants
+              </button>
+            </div>
+            <div class="tab-panels">
+              <article
+                class="tab-panel active"
+                role="tabpanel"
+                id="audience-managers"
+                aria-labelledby="tab-managers"
+                data-panel="managers"
+              >
+                <div class="tab-content">
+                  <div class="tab-image">
+                    <img src="assets/user-pm.avif" alt="Property manager" class="tab-image" />
+                  </div>
+                  <div class="tab-copy">
+                    <h3>Property Managers &amp; Team</h3>
+                    <p>
+                      We understand your challenges: you waste too much time on tedious tasks,
+                      struggle to get reliable updates on maintenance issues, and fall behind on
+                      paperwork while managing multiple properties. You also want to keep your
+                      tenants happy, increase your revenue, and reduce your costs.
+                    </p>
+                    <p>
+                      How about a simple solution that does all that for you? Meet Tasklane, the
+                      smart property management platform. Tasklane helps you save time by automating
+                      your workflows, assigning and tracking each job with real-time progress, and
+                      handling all your paperwork in one place. You can access it from anywhere,
+                      anytime. Our easy-to-use dashboard shows you all the key metrics on your
+                      properties, teams, and maintenance. Plus, our AI-powered insights help you
+                      make data-driven decisions and plans for your property investments. Ready to
+                      give it a try? Book a demo today
+                    </p>
+                  </div>
+                </div>
+              </article>
+              <article
+                class="tab-panel"
+                role="tabpanel"
+                id="audience-contractors"
+                aria-labelledby="tab-contractors"
+                data-panel="contractors"
+                hidden
+              >
+                <div class="tab-content">
+                  <div class="tab-image">
+                    <img src="assets/user-contractor.avif" alt="Contractor" class="tab-image" />
+                  </div>
+                  <div class="tab-copy">
+                    <h3>Contractors</h3>
+                    <p>Do you want to:</p>
+                    <ul>
+                      <li>Attract and retain more customers?</li>
+                      <li>Track and manage your projects efficiently?</li>
+                      <li>Get instant approval for your quotes?</li>
+                      <li>Confirm the completion of your jobs with ease?</li>
+                      <li>Monitor the payment status of your invoices?</li>
+                    </ul>
+                    <p>
+                      If you answered yes to any of these questions, then you need Tasklane.
+                      Tasklane is an end-to-end task management tool that helps you streamline your
+                      workflow and grow your business. With Tasklane, you can:
+                    </p>
+                    <ul>
+                      <li>Get transparent and fast feedback on your quotes from your clients</li>
+                      <li>
+                        Use a simple app to mark your jobs as done and notify the property manager
+                      </li>
+                      <li>
+                        Store and access all your documents in one place, without losing track of
+                        anything
+                      </li>
+                      <li>Find and connect with more potential customers through our platform</li>
+                    </ul>
+                    <p>Sounds good to you? Book a demo today.</p>
+                  </div>
+                </div>
+              </article>
+              <article
+                class="tab-panel"
+                role="tabpanel"
+                id="audience-tenants"
+                aria-labelledby="tab-tenants"
+                data-panel="tenants"
+                hidden
+              >
+                <div class="tab-content">
+                  <div class="tab-image">
+                    <img src="assets/user-tenant.avif" alt="Tenant" class="tab-image" />
+                  </div>
+                  <div class="tab-copy">
+                    <h3>Tenants</h3>
+                    <p>
+                      Stay informed with transparent updates, faster issue resolution, and smoother
+                      communication throughout every request. Tasklane makes it easy for you to
+                      report maintenance issues, track progress in real time, and communicate
+                      directly with your property management team.
+                    </p>
+                  </div>
+                </div>
+              </article>
+            </div>
           </div>
         </div>
       </section>
@@ -447,34 +474,28 @@
           </header>
           <div class="team-mission">
             <h3>Our mission</h3>
-            <p>
-              Transforming the global property management landscape by helping customers grow
-              efficiently and sustainably with a simple, cutting-edge approach that puts smiles on
-              the faces of property management teams.
-            </p>
+            <div class="team-mission-copy">
+              <p>
+                Transforming the global property management landscape by helping customers grow
+                efficiently and sustainably with a simple, cutting-edge approach that puts smiles on
+                the faces of property management teams.
+              </p>
+            </div>
           </div>
-          <p class="supported-by">We're supported by</p>
+          <h4 class="supported-by">We're supported by</h4>
           <div class="support-logos" aria-label="Supported by">
-            <img
-              src="https://static.wixstatic.com/media/5e97b2_c6d9af6c4dda45adaef9ce03b22582dc~mv2.webp/v1/fill/w_75,h_75,al_c,q_80,enc_avif,quality_auto/LBS.webp"
-              alt="LBS"
-              loading="lazy"
-            />
-            <img
-              src="https://static.wixstatic.com/media/5e97b2_d3a7b62b13aa4f459ce2b1e1463b6832~mv2.webp/v1/fill/w_76,h_75,al_c,q_80,enc_avif,quality_auto/launchpad.webp"
-              alt="Launchpad"
-              loading="lazy"
-            />
-            <img
-              src="https://static.wixstatic.com/media/5e97b2_d84569277f9648b1a178987bba643d35~mv2.png/v1/fill/w_75,h_75,al_c,q_85,enc_avif,quality_auto/iepc.png"
-              alt="IEPC"
-              loading="lazy"
-            />
-            <img
-              src="https://static.wixstatic.com/media/5e97b2_07ab4a63582b4f3ba186bafb437e411f~mv2.png/v1/fill/w_75,h_75,al_c,q_85,enc_avif,quality_auto/tel.png"
-              alt="TEL"
-              loading="lazy"
-            />
+            <div class="support-logo">
+              <img src="assets/support-LBS.avif" alt="LBS" loading="lazy" />
+            </div>
+            <div class="support-logo">
+              <img src="assets/support-launchpad.avif" alt="Launchpad" loading="lazy" />
+            </div>
+            <div class="support-logo">
+              <img src="assets/support-IEPC.avif" alt="IEPC" loading="lazy" />
+            </div>
+            <div class="support-logo">
+              <img src="assets/support-TEL.avif" alt="TEL" loading="lazy" />
+            </div>
           </div>
         </div>
       </section>
@@ -546,7 +567,7 @@
       <section class="section-form" id="book-demo">
         <div class="container form-grid">
           <div>
-            <header class="section-head left">
+            <header class="section-head section-head--light">
               <h2 class="section-title">Book a demo</h2>
               <p>
                 Get in touch and we'll arrange a live demo of the Tasklane platform at a time that
@@ -569,7 +590,7 @@
             </p>
 
             <div class="field-row">
-              <label for="first-name">First name</label>
+              <label for="first-name">First name*</label>
               <input
                 id="first-name"
                 name="first-name"
@@ -577,9 +598,10 @@
                 autocomplete="given-name"
                 required
               />
+              <p class="error-message">Please enter a first name</p>
             </div>
             <div class="field-row">
-              <label for="last-name">Last name</label>
+              <label for="last-name">Last name*</label>
               <input
                 id="last-name"
                 name="last-name"
@@ -589,18 +611,25 @@
               />
             </div>
             <div class="field-row">
-              <label for="email">Email</label>
+              <label for="email">Email address*</label>
               <input id="email" name="email" type="email" autocomplete="email" required />
             </div>
             <div class="field-row">
-              <label for="phone">Phone</label>
+              <label for="phone">Phone number*</label>
               <input id="phone" name="phone" type="tel" autocomplete="tel" required />
             </div>
             <div class="field-row">
               <label for="message">Message</label>
-              <textarea id="message" name="message" rows="4"></textarea>
+              <textarea
+                id="message"
+                name="message"
+                rows="4"
+                placeholder="Please let us know of your availability or any questions you may have in advance of the demo"
+              ></textarea>
             </div>
-            <button type="submit" class="button button--dark">Submit</button>
+            <div class="submit-button-wrapper">
+              <button type="submit" class="button">Submit</button>
+            </div>
           </form>
         </div>
       </section>
@@ -619,14 +648,22 @@
             EC2A 4NE
           </p>
         </div>
-        <div>
+        <div class="contact">
           <h3>Contact us</h3>
-          <p><a href="tel:+4407778692354">+44 07778692354</a></p>
           <p>
-            <a href="mailto:info@tasklane.app?subject=Tasklane%20enquiry">info@tasklane.app</a>
+            <a href="tel:+4407778692354">
+              <img src="assets/contact-phone.svg" alt="Phone icon" />
+              <span>+44 07778692354</span></a
+            >
+          </p>
+          <p>
+            <a href="mailto:info@tasklane.app?subject=Tasklane%20enquiry">
+              <img src="assets/contact-email.svg" alt="Email icon" />
+              <span>info@tasklane.app</span>
+            </a>
           </p>
         </div>
-        <div>
+        <div class="comparisons">
           <h3>Compare us</h3>
           <ul class="compare-list">
             <li><a href="#">Tasklane vs FixFlo</a></li>
@@ -644,23 +681,25 @@
       </div>
       <div class="footer-bottom">
         <div class="container footer-bottom-inner">
-          <p>&copy;2025 Tasklane Technology Ltd</p>
+          <p>&copy;2023-2026 Tasklane Technology Ltd</p>
           <ul class="social-links">
             <li>
               <a
                 href="https://www.facebook.com/people/Tasklane-Techonology/61550846068788/"
                 target="_blank"
                 rel="noopener"
-                >Facebook</a
               >
+                <img src="assets/social-facebook.png" alt="Facebook" />
+              </a>
             </li>
             <li>
               <a
                 href="https://www.linkedin.com/company/tasklane-technology/"
                 target="_blank"
                 rel="noopener"
-                >LinkedIn</a
               >
+                <img src="assets/social-linkedin.png" alt="LinkedIn" />
+              </a>
             </li>
           </ul>
         </div>
