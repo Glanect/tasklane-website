@@ -258,6 +258,11 @@ textarea {
   text-align: left;
 }
 
+.section-head p {
+  max-width: 640px;
+  margin: 0 auto;
+}
+
 .section-title {
   margin: 0 0 20px 0;
   color: var(--color-black);
@@ -474,7 +479,41 @@ textarea {
 }
 
 /* ===================================================================
-   QUOTE  —  bg: #f5f5f5
+   Promo shots
+   =================================================================== */
+.section-promo-shots {
+  position: relative;
+  background: var(--color-grey-f5);
+}
+
+.section-promo-shots .inner {
+  position: relative;
+  width: 66.40316205533598%;
+  margin: 0 auto;
+}
+
+.section-promo-shots .image-dashboard {
+  position: relative;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.section-promo-shots .image-start {
+  position: absolute;
+  bottom: 10%;
+  left: -12%;
+  width: 25%;
+}
+
+.section-promo-shots .image-checklists {
+  position: absolute;
+  bottom: 0;
+  right: -12%;
+  width: 25%;
+}
+
+/* ===================================================================
+   QUOTE
    =================================================================== */
 
 .quote-section {
@@ -589,9 +628,9 @@ cite {
 .metric-label {
   margin: 0 0 0.15rem;
   color: var(--color-black);
-  font-family: var(--font-body);
+  font-family: var(--font-heading);
   font-size: 16px;
-  font-weight: 400;
+  font-weight: 700;
 }
 
 .metric-value {
@@ -607,8 +646,8 @@ cite {
 .section-how {
   display: flex;
   justify-content: center;
-  background: var(--color-grey-fe);
   padding: 76px 0;
+  background: var(--color-grey-f5);
 }
 
 .section-how .container {
@@ -1076,7 +1115,7 @@ cite {
    =================================================================== */
 
 .site-footer {
-  background: var(--color-grey-fb);
+  background: var(--color-grey-f5);
   border-top: 1px solid var(--color-grey-e3);
 }
 
@@ -1098,7 +1137,7 @@ cite {
   gap: 1.5rem;
   max-width: 850px;
   margin: 0 auto;
-  padding: 2.4rem 20px 1.5rem;
+  padding: 2.4rem 20px 2.4rem;
 }
 
 .footer-grid .comparisons {
@@ -1153,8 +1192,8 @@ cite {
 .footer-bottom-inner {
   max-width: 850px;
   margin: 0 auto;
-  padding-top: 1rem;
-  padding-bottom: 1rem;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
   text-align: right;
 }
 
@@ -1446,6 +1485,27 @@ cite {
   }
   .compare-list li {
     width: auto;
+  }
+
+  .section-promo-shots .inner {
+    width: 100%;
+    padding-top: 20px;
+  }
+
+  .section-promo-shots .phone-shots {
+    display: flex;
+    gap: 20px;
+    padding-top: 24px;
+  }
+
+  .section-promo-shots .image-start {
+    position: static;
+    width: 50%;
+  }
+
+  .section-promo-shots .image-checklists {
+    position: static;
+    width: 50%;
   }
 }
 
