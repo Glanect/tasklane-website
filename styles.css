@@ -180,6 +180,7 @@ body.privacy-policy-page main#main-content {
 }
 
 body.privacy-policy-page main#main-content .container {
+  width: 100%;
   max-width: var(--max-content-width);
 }
 
